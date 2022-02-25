@@ -1,5 +1,9 @@
 add_library(git2internal OBJECT)
-set_target_properties(git2internal PROPERTIES C_STANDARD 90)
+set(CSTD 90)
+if(C_STANDARD)
+	set(CSTD ${C_STANDARD})
+endif()
+set_target_properties(git2internal PROPERTIES C_STANDARD ${CSTD})
 set_target_properties(git2internal PROPERTIES C_EXTENSIONS OFF)
 
 
@@ -259,7 +263,7 @@ endif()
 add_library(git2 ${WIN_RC} ${LIBGIT2_OBJECTS})
 target_link_libraries(git2 ${LIBGIT2_SYSTEM_LIBS})
 
-set_target_properties(git2 PROPERTIES C_STANDARD 90)
+set_target_properties(git2 PROPERTIES C_STANDARD ${CSTD})
 set_target_properties(git2 PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set_target_properties(git2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set_target_properties(git2 PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
